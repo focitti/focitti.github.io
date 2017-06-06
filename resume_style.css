@@ -1,0 +1,28 @@
+/****************************************************************************/
+/* resume_style.css                                                         */
+/* Last Implemented by: Faith A Ocitti                                      */
+/* Last Implemented on: June 5th 2017                                       */
+/* Purpose: This document provides rules for the resume.html                */
+/****************************************************************************/
+
+h1 {
+	font-size: 55px;
+	font-family: Helvetica;
+}
+
+h2 {
+	font-size: 18px;
+	font-family: Helvetica;
+}
+
+h3 {
+	font-size: 16px;
+	font-style: bold;
+	font-family: Helvetica;
+}
+
+h4 {
+	font-size: 14px;
+	font-style: italic;
+	font-family: Helvetica;
+}
