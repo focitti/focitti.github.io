@@ -1,0 +1,44 @@
+/****************************************************************************/
+/* bio_style.css                                                            */
+/* Last Implemented by: Faith A Ocitti                                      */
+/* Last Implemented on: June 5th 2017                                       */
+/* Purpose: This document provides rules for the bio.html.                  */
+/****************************************************************************/
+
+body {
+	background-image: url("image2.jpg");
+}
+
+h1 {
+	font-family: monospace;
+	font-size: 55px;
+	color: #FFFFFF;
+}
+
+h2 {
+	text-align: center;
+	float:left;
+	bottom: 0;
+	position: fixed;
+}
+
+h3 {
+	text-align: center;
+	right:0;
+	bottom: 0;
+	position: fixed;
+}
+
+p {
+	font-family: monospace;
+	font-size: 19px;
+	color: #FFFFFF;
+	width: 40%
+	
+}
+
+a {
+	font-size: 23px;
+	font-family: monospace;
+	color: #FFFFFF;
+}
