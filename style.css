@@ -1,0 +1,509 @@
+/*dropdown menu:  https://stackoverflow.com/questions/18786546/creating-drop-down-menu-on-click-css*/
+
+/* NAVIGATION BAR */
+
+/* black band at top */
+.navbar {
+	top: 0;
+	width: 100%;
+	background-color: #000000;
+	position: fixed;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+/* don't display name */
+.header {
+	display: none;
+}
+/* remove bullet point */
+ul.navbar-list {
+	list-style-type: none;
+}
+/* nav bar in a line */
+.navbar-content li {
+    float: left;
+}
+/* text decoration */
+.navbar-content li a {
+	display: inline-block;
+	text-decoration: none;
+	color: #C0C0C0;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-left:15px;
+	padding-right:15px;
+}
+/* hover effect */
+.navbar-content a:hover {
+    color: #FFFFFF;
+}
+
+/****************************************************************************/
+
+/*CONTENT DIV*/
+			
+/* first screen */
+#the_skinny {
+	height: 100vh;
+	width: 100%;
+	min-height:100%;
+	background-color: #A9A9A9;
+}
+/* text formatting for typewriter effect */
+.animation {
+	color: #A9A9A9;
+	font-family: monospace; 
+	font-weight: bold;
+	font-size: 60px;
+	margin: 0 auto; 
+	position:relative;  
+	top: 50%;
+	animation: typwriter 4s steps(19) forwards; 
+	overflow: hidden; 
+	white-space: nowrap;
+}
+.welcome {
+	color: #A9A9A9;
+	font-family: monospace; 
+	font-weight: bold;
+	text-align: center;
+	font-size: 20px;
+	margin: 0 auto; 
+	animation: welcometypwriter 6s steps(83) forwards;
+	animation-delay: 3.5s;
+transition: opacity 4s linear;
+	position:relative;
+	 top: 50%;
+	overflow: hidden; 
+	white-space: nowrap;
+}
+/* typewriter effect */
+@keyframes typwriter { from { width: 0; color: #A9A9A9;} to { width: 19ch; color: #ffffff;} } 
+@keyframes welcometypwriter { from { width: 0; color: #A9A9A9;} to { width: 83ch; color: #ffffff;} } 
+/* delayed appearance effect */
+@keyframes appear { from { width: 0; } to { width: 50ch; } }
+/* design for hamburger effect */
+.circle {
+    width: 56px;
+    height: 56px;
+    position: relative;
+    top: 50%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin: 30vh auto;
+    cursor: pointer;
+    z-index: 2;
+animation: appear 10s steps(1);
+
+}
+.before,
+.after {
+    content: '';
+    position: absolute;
+    width: 42px;
+    height: 2px;
+    background-color: white;
+    border-radius: 0;
+    top: 27px;
+    -webkit-transition: 150ms ease-out;
+    -moz-transition: 150ms ease-out;
+    -o-transition: 150ms ease-out;
+    transition: 150ms ease-out;
+    z-index: 0;
+animation: appear 10s steps(1);
+
+}
+.before {
+    left: 7px;
+}
+.after {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    right: 7px;
+}
+.circle:hover {
+    border: 1px solid #717171;
+    background-color: #717171;
+    padding-bottom: 1px;
+}
+.circle:hover .before {
+    -ms-transform: rotate(225deg);
+    -webkit-transform: rotate(225deg);
+    -moz-transform: rotate(225deg);
+    transform: rotate(225deg);
+    -webkit-transition: 300ms ease-in-out all;
+    -moz-transition: 300ms ease-in-out all;
+    -o-transition: 300ms ease-in-out all;
+    transition: 300ms ease-in-out all;
+
+}
+.circle:hover .after {
+    -ms-transform: rotate(-225deg);
+    -webkit-transform: rotate(-225deg);
+    -moz-transform: rotate(-225deg);
+    transform: rotate(-225deg);
+    -webkit-transition: 250ms ease-in all;
+    -moz-transition: 250ms ease-in all;
+    -o-transition: 250ms ease-in all;
+    transition: 250ms ease-in all;
+}
+
+				/***/
+/* bio screen */
+#bio {
+	background-color:#FFFFFF; 
+	overflow: auto;
+	padding-top:1%;
+	padding-bottom:2%;
+	padding-left:15%;
+	padding-right:15%;
+}
+/* table effect for bio screen */
+* {
+	box-sizing: border-box;
+}
+.column {
+	float:left;
+	padding: 2%;
+}
+.bio-list::after {
+	content: "";
+	clear: both;
+	display:table;
+}
+.details {
+	width: 35%;
+	padding-left: 5%;
+}
+.image {
+	width: 25%;
+}
+.about-me {
+	width: 40%;
+	padding-right: 5%;
+}
+.details p {
+	text-align: center;
+	margin-top: 7%;
+}
+.details h1 {
+	margin-top: 15%;
+	margin-bottom: 0;
+}
+.about-me p {
+	text-align: center;
+}
+.image img {
+	margin-top: 25%;
+}
+				/***/
+/* education screen */
+#education {
+	background-color:#fff8e5; 
+	overflow: auto;
+	padding-top:1%;
+	padding-bottom:2%;
+	padding-left:15%;
+	padding-right:15%;
+}
+				/***/
+/* experience screen */
+#experience {
+	background-color:#FFFFFF; 
+	overflow: auto;
+	padding-top:1%;
+	padding-bottom:2%;
+	padding-left:15%;
+	padding-right:15%;
+}
+a {
+	text-decoration: none;
+	color: #55669c;
+}
+a:hover {
+	text-decoration: underline;
+	color: #3f4862;
+}
+				/***/
+/* skills screen */
+#skills {
+	background-color:#fff8e5; 
+	overflow: auto;
+	padding-top:1%;
+	padding-bottom:2%;
+	padding-left:20%;
+	padding-right:20%;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 25px;
+}
+
+#cplus, #r, #c, #html, #javascript  {
+  width: 0;
+  height: 20px;
+  background-color: #808080;
+  border-radius: 25px;
+}
+/* hover button effect */
+.button {
+  border-radius: 4px;
+  background-color: #808080;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 5px;
+  width: 30%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px auto;
+    display:block;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+				/***/
+/* projects screen */
+#projects {
+	background-color:#FFFFFF; 
+	overflow: auto;
+	padding-top:1%;
+	padding-bottom:2%;
+	padding-left:15%;
+	padding-right:15%;
+}
+
+    /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+.card {
+    transition: 0.3s;
+    width: 20%;
+    display: inline-block;
+    float:left;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+.card:hover {
+	opacity: 1;
+-webkit-filter: grayscale(0%);
+}
+
+				/***/
+/* contact screen */
+#contact {
+	padding-top:1%;
+	padding-bottom:1%;
+	padding-left:5%;
+	padding-right:5%;
+	height: 20vh;
+	color: #ffffff; 
+	background-color: #696969 ;
+}
+h1.contact-heading, p.contact-para {
+	text-align: center;
+}
+#contact a {
+	color: #cccccc;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-decoration: none;
+}
+#contact a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+				/***/
+/* general aesthetic */
+h1, h2, h3, p, a, li {
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+h1, h3 {
+	font-weight:500;
+	line-height:1.1;
+}
+h1 {
+	text-align:center;
+}
+small {
+	font-weight:400;
+	line-height:1;
+	color:#777777;
+}
+
+/****************************************************************************/
+
+/* mobile friendly view*/
+@media only screen and (max-width: 705px) {
+	/* NAVIGATION BAR */
+
+	/* black band at top */
+	.navbar {
+		top: 0;
+		width: 100%;
+		background-color: #000000;
+		position: fixed;
+		font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	}
+	/* don't display name on mobile view */
+	.first-bullet {
+		display: none;
+	}
+	/* Styling "Faith A Ocitti" in nav bar */
+	.header {
+		display: inline-block;
+		color: #C0C0C0;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 20px;
+		text-align: center;
+		padding-left: 37%;
+		padding-right: 37%;
+	}
+	/* white label when hover over "Faith A Ocitti" */
+	.navbar:hover .header {
+		color: #FFFFFF;
+	}
+	/* dropdown menu styling */
+	.navbar-content {
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;
+		width: 100%;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+	}
+	/* styling items within the dropdown menu */
+	.navbar-content a {
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+/*		text-align: center;*/
+		color: #000000;
+	}
+	/* background colour when hover over menu items */
+	.navbar-content a:hover {
+		background-color: #f1f1f1;
+		color: #000000;
+	}
+	/* actually making the menu a dropdown menu */
+	.navbar:hover .navbar-content {
+		display: block;
+	}
+	/* list centering and removing list styling */
+	ul.navbar-list {
+		list-style-type: none;
+		padding-left: 37%;
+		padding-right: 37%;
+	}
+    	ul.navbar-list li.center, 
+        ul.navbar-list li {
+		float: none;
+		text-align: center;
+	}
+}
+
+
+#canvas {
+position: fixed;
+}
+
+/*https://www.w3schools.com/css/tryit.asp?filename=trycss_background_shorthand*/
