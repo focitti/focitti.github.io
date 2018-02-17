@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+
+<html>
+
+	<head>
+		<title>Security Analysis</title>
+		<link rel="stylesheet" href="security-style.css" type="text/css" />
+		<meta charset="utf-8" />
+	</head>
+
+	<body>
+		<h1>Introduction</h1>
+			<p>The following is a security analysis of the website <a href="https://defense-in-derpth.herokuapp.com">
+			https://defense-in-derpth.herokuapp.com</a>. The website logs the check-in information of site vistors and 
+			the resultant logs are stored in a Mongo data base. However, with the increasing prevelance of noSQL 
+			databases which provide highly flexible data management, there should similarly be an increasing emphasis 
+			on securing said databases. Websites that are not properly sanitised prove to be a breeding ground for 
+			hacking and general tomfoolery. The following assessment of the website includes vulneranilities 
+			as well as possible remedies.</p>
+		<h1>Methodology</h1>
+			<p>The security of this website was evaluated in two steps:</p>
+				<ul style="list-style-type:circle">
+					<li>"Grey-box" analysis was performed where the code was not reviewed. However, there were certain
+					pieces of information that were acquired from observing how the website was used and breached. This
+					information that was distributed over an <a href="https://piazza.com">online forum</a>
+					assessing how best to breach the website.</li>
+					<li>After the initial analysis, the code was analysed for glaring security risks. Additionally, in
+					this phase, remedies to the the problems identified from the grey-box analysis were retrieved.</li>
+				</ul>
+		<h1>Abstract of Findings</h1>
+			<p>The assessment of the website found several potential security breaches. These were mainly a result of the lack of data verification where the
+			client was given free reign to manipulate aspects of the website which in turn would affect the website in its entirity. Additionally, a lot of the
+			data was exposed in the writing of the code so that some information was more accessible to the user than it should have been.</p>
+		<h1>Issues Found</h1>
+			<ul style="list-style-type:circle">
+				<li><h3>Cross Site Scripting</h3>
+					<p>Perhaps the most glaring vulneranility is that of cross-site scripting of HTML and JavaScript
+					into the clientside interface. This usability enables the potentail hacker to manipulate the script such 
+					that malicious content can be sent back from the server wreaking havoc on the poor user.</p>
+					<p>The following line of code was implemented to successfully check in to the website without any permissions:</p>
+					<p><span class="code">curl --data "login=mchow&lat=0&lng=0" https://defense-in-derpth.herokuapp.com/sendLocation</span></p>
+					<p>This vulneranility is particularly severe because the potentail hacker could use the <span class="other_code">login</span>
+					field to implement JavaScript such as:
+						<ul>
+							<li><span class="code">alert('Malware was detected on your device. To secure your machine[...]')</span><br/><br/>
+							The code above, while immediately malignant, may lead to susceptible
+							users following the instructions on the page and venturing into untrusted territory. Additionally, once
+							a hack is made it is possible for other curious hackers to follow with increasingly aggressive material
+							as experienced on the website between 03/07/2017 and 05/07/2017.</li><br/>
+							<li><span class="code">window.location='https:www.google.com/search?q=what+is+xss'</span><br/><br/>
+							This script could be particularly malicious if the user was redirected to a website capable of targetting user
+							information and perhaps infecting the user machine with malware.</li>
+
+						</ul>
+				<h4>Potential Remedy</h4>
+					<p>All user input must be validated. The html code only ensures that the login is not undefined. This is not sufficient in a
+					scenario where the website is exposed to the public. It is therfore essential to escape all user inputted data before it is 
+					transmitted to the database. This can be done by replacing all html special characters with the equivalent non-special text string. 
+					There are many software packages that perform the role of sanitisation. Through npm there are modules
+					such as <span class="code">Helmet</span> and <span class="code">sanitize-html</span> that perform the job sufficiently enabling moderate
+					security.</p></li>
+				<li><h3>Data Overflow</h3>
+					<p>There were two types of data overflows (or perhaps datum overflows?) identified:
+					<p><b>Input Overflow:</b> There is no cap as to how many characters can be inputted in the login field. This is a minor security
+					risk although long unmonitored entry could make cross-site scripting easier to execute.</p>
+					<p><b>Server Overflow:</b> Another security risk identified was the lack of regulation of how many times a user can access a website. This initially benign
+					oversight could be manipulated by a potential hacker to bring down a website by swarming the database with unnecessaey information
+					making it near impossible for other users to access. This overloading of the system can not only inhibit other users from using 
+					the website, but also completely crash the server. Mongo data bases provide a finite amount of space, and 
+					<a href="https://github.com/tuftsdev/comp20-focitti/blob/master/security/loop.bash">a simple shell script</a>
+					coding for an infinite loop could be responsible for bringing down a website.</p>
+				<h4>Potential Remedy</h4>
+					<p><b>Input Overflow:</b> This can be easily regulated by ensuring that the number of characters are less than a reasonable amount. The
+					creator of the website is able to anticipate how the website can be used and thereby anticipate usage parameters.</p>
+					<p><b>Server Overflow:</b> The server overflow on the other hand is a little more complicated. The web developper may chose to implement
+					code that ensures that a particular authorisation code, IP address or login can only be used a certain number of times within a specified period 
+					of time.</p></li>
+				<li><h3>NoSQL Injections</h3>
+					<p>NoSQL injections are a rampant form of attacking a website as it is possible to retrieve susceptible user information. A striking example of
+					such an attack uses the operator <span class="code">[$ne]</span> to display all the documentation of the site where the user is not 'mchow':
+					<p><span class="code">http://defense-in-derpth.herokuapp.com/checkins.json?login[$ne]=mchow</span></p>
+					<p>This makes the user vuleranable to having their data acquired and distrivuted.</p>
+				<h4>Potential Remedy</h4>
+					<p>The easiest way to prevent such attacks is validation of all data provided in the URL. This may include verifying that the data is in fact
+					a string so that strings of characters are not translated into operators or other forms of text that could potentially expose user data beyond
+					specification.</p></li>
+				<li><h3>Other Security Concerns</h3>
+					<p>There are a few minor concerns that might ultimately lead to major problems in the website:</p>
+						<ul>
+							<li><span class="code">response.set('Content-Type','text/html');</span><br/><br/>
+							It is never a good idea to set parameters in functions where retrieving said parameters is readily available. This can be manipulated
+							so as to change th econtent and use the website in a way the web developper did not intend. Data abstraction is key. The user must 
+							never be exposed to parameters the developper is setting. Moving code outside of the get function may help alleviate some
+							of these concerns.</li><br/>
+							<li><span class="code">response.header("Access-Control-Allow-Origin", "*");</span><br/><br/>
+							Although this line of code is easy to implement and is used to circumvent tedious tasks that come with regulation, it is 
+							basically welcoming requests to unintended target origins. It is best in this case to specify the target origin in order
+							to ensure that the website is used as it was created to be used.</li>
+
+						</ul></li>
+			</ul>
+		<h1>Conclusion</h1>
+			<p>In summation, it is important to secure any and all data possible. It is infintely more cost effeciant to spend resources
+			developing a website that will be relatively secure as opposed to spending resources trying to patch up security concerns. The internet is not 
+			secure and a noSQL database such as MongoDB is especially insecure. Many technologies, such as
+			NoSQLMap, exist for this purpose: to exploit vulneranilities. Therefore it is in the web programmer's best interest to put up
+			every defense mechanism they can from encapsulating data better to escaping ALWAYS, and sanitising code to changing default settings.</p>
+			<p>Ultimately, the damage to this website will cost more time to fix now, than it would have costed to create at full capacity. Assuming the web
+			programmer eats two meals a day with snacks, averaging about $15; their typing speed is about 40 words per minute; and they take a 10 minute break
+			every half hour as well as a half hour break every 3 hours - it would cost at least $60 to repair this website accounting for a daily 10 hour nap 
+			period.</p>
+		<h1>Resources</h1>
+			<ul style="list-style-type:circle">
+				<li><a href="https://www.w3.org/wiki/CORS_Enabled">https://www.w3.org/wiki/CORS_Enabled</a>;
+				<li><a href="https://deadliestwebattacks.com/tag/cors/">https://deadliestwebattacks.com/tag/cors</a>;
+				<li><a href="https://expressjs.com/en/advanced/best-practice-security.html">https://expressjs.com/en/advanced/best-practice-security.html</a>;
+				<li><a href="http://www.hackingarticles.in/5-ways-file-upload-vulnerability-exploitation/">http://www.hackingarticles.in/5-ways-file-upload-vulnerability-exploitation</a>;
+			</ul>
+		<img src="happiness.png" alt="bey" style="width:608px;height:456px;" align="middle">
+	</body>
+</html>

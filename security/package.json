@@ -1,0 +1,19 @@
+{
+  "name": "server-vuln",
+  "version": "3.0.0",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.6.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.29",
+    "validator": "^7.2.0"
+  },
+  "main": "server-vuln.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
