@@ -2,7 +2,7 @@ function move() {
   /* get current date */
   var currDate = new Date()
   /* since c++ is the oldest language, all other time periods compared to it */
-  var goldStandard = monthDiff(new Date(2015, 11, 31),currDate);
+  var goldStandard = monthDiff(new Date(2015, 11, 31),currDate); 
   /* c++ chart */
   var cpluselem = document.getElementById("cplus");   
   var cpluswidth = 1;
