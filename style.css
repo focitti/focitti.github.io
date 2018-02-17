@@ -503,7 +503,7 @@ small {
 
 
 #canvas {
-position: fixed;
+position: fixed; 
 }
 
 /*https://www.w3schools.com/css/tryit.asp?filename=trycss_background_shorthand*/
